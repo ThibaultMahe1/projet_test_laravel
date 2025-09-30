@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\univers;
+use App\Http\Requests\UniversRequest;
 use App\Models\Univers as ModelsUnivers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -31,16 +32,8 @@ class UniversController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UniversRequest $request)
     {
-        $validated = $request->validate([
-            'nom' => 'required|min:3',
-            'description' => 'required|min:3',
-            'img_fond' => 'required|min:6',
-            'logo' => 'required|min:6',
-            'couleur_principal' => 'required|min:6',
-            'couleur_secondaire' => 'required|min:6',
-        ]);
 
         $pathfond = $request->file('img_fond')->store('image', 'public');
         $path = $request->file('logo')->store('image', 'public');
