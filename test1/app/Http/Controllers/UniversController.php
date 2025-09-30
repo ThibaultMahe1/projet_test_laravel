@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\univers;
 use App\Http\Requests\UniversRequest;
+use App\Http\Requests\UniversEditRequest;
 use App\Models\Univers as ModelsUnivers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -25,8 +26,8 @@ class UniversController extends Controller
      */
     public function create()
     {
-        $type = "creation";
-        return view("univers.creation" , compact('type'));
+        $type="add";
+        return view("univers.modelUnivers", compact('type'));
     }
 
     /**
@@ -63,13 +64,14 @@ class UniversController extends Controller
      */
     public function edit(univers $univers)
     {
-        return view("univers.edit", compact('univers'));
+        $type='edit';
+        return view("univers.modelUnivers", compact('univers'), compact('type'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, univers $univers)
+    public function update(UniversEditRequest $request, univers $univers)
     {
         $pathfond = $univers->img_fond;
         $path = $univers->logo;

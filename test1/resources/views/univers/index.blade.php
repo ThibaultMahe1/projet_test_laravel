@@ -6,7 +6,7 @@
 
 
 @section('content')
-    <div>
+    <div class="container">
         <table class="table " style=" text-align:center;align-item:center">
             <tr style="background-color:#2d3034; ">
                 <th scope="col" style='background:none;color:white;'>#</th>
@@ -23,10 +23,10 @@
                 <p>{{ $univers->nom }}</p>
                 </td>
                 <td style='background:none; color:white'>
-                    <p style="color: #2d3034">principal :</p>
-                    <div style="width: 70px;height:30px;background-color:{{ $univers->couleur_principal }};margin-bottom:4px;border-radius:10px">{{ $univers->couleur_principal }}</div>
-                    <p style="color: #2d3034">secondaire :</p>
-                    <div style="width: 70px;height:30px;background-color:{{ $univers->couleur_secondaire }};border-radius:10px">{{ $univers->couleur_secondaire }}</div>
+                    <p style="color: #2d3034;margin:0px">principal :</p>
+                    <div style="width: 100%;height:30px;background-color:{{ $univers->couleur_principal }};margin-bottom:4px;border-radius:10px">{{ $univers->couleur_principal }}</div>
+                    <p style="color: #2d3034;margin:0px">secondaire :</p>
+                    <div style="width: 100%;height:30px;background-color:{{ $univers->couleur_secondaire }};border-radius:10px">{{ $univers->couleur_secondaire }}</div>
                 </td>
                 <td style='background:none'>
                     <p>{{ $univers->description }}</p>

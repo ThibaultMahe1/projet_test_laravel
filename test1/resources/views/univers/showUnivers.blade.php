@@ -1,3 +1,10 @@
-<div>
-    <!-- Very little is needed to make a happy life. - Marcus Aurelius -->
-</div>
+@extends('layout.header')
+
+@section('title')
+    show
+@endsection
+
+
+@section('content')
+
+@endsection
