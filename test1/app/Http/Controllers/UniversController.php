@@ -15,7 +15,7 @@ class UniversController extends Controller
     public function index()
     {
         $list = Univers::all();
-        return view('index' , compact('list'));
+        return view('univers.index' , compact('list'));
         //
     }
 
@@ -62,7 +62,7 @@ class UniversController extends Controller
     public function show(univers $univers)
     {
         //
-        echo 'cest pas le bon chef';
+        return view("univers.showUnivers", compact('univers'));
     }
 
     /**
@@ -116,39 +116,3 @@ class UniversController extends Controller
          return redirect('/')->with('success', 'univers supprimée avec succès !');
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
