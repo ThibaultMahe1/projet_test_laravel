@@ -7,19 +7,26 @@
 
 @section('content')
     <div>
-        <table class="table ">
+        <table class="table " style=" text-align:center;align-item:center">
             <tr style="background-color:#2d3034; ">
                 <th scope="col" style='background:none;color:white;'>#</th>
                 <th scope="col" style='background:none;color:white;'>nom :</th>
+                <th scope="col" style='background:none;color:white;'>couleur :</th>
                 <th scope="col" style='background:none;color:white;'>description :</th>
                 <th scope="col" style='background:none;color:white;'>logo :</th>
                 <th scope="col" style='background:none;color:white;'>action :</th>
             </tr>
             @foreach ( $list as $univers )
-            <tr style='background-image:url({{ asset('storage/'.$univers->img_fond) }});background-size: contain;background-repeat: no-repeat;opacity:0.6;'>
+            <tr>
                 <td style='background:none;font-size:30px' scope="row">{{ $univers->id }}</td>
                 <td style='background:none;font-size:30px'>
-                <p style='color:{!! $univers->couleur_principal !!};-webkit-text-stroke: 1px {!! $univers->couleur_secondaire !!};'>{{ $univers->nom }}</p>
+                <p>{{ $univers->nom }}</p>
+                </td>
+                <td style='background:none; color:white'>
+                    <p style="color: #2d3034">principal :</p>
+                    <div style="width: 70px;height:30px;background-color:{{ $univers->couleur_principal }};margin-bottom:4px;border-radius:10px">{{ $univers->couleur_principal }}</div>
+                    <p style="color: #2d3034">secondaire :</p>
+                    <div style="width: 70px;height:30px;background-color:{{ $univers->couleur_secondaire }};border-radius:10px">{{ $univers->couleur_secondaire }}</div>
                 </td>
                 <td style='background:none'>
                     <p>{{ $univers->description }}</p>
