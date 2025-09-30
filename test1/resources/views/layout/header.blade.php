@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
-<header class="p-3 mb-2 bg-dark text-white row row-cols-lg-auto g-3 align-items-center">
+<header class="p-3 mb-2 text-white bg-dark row row-cols-lg-auto g-3 align-items-center">
     <h1 class="col-md-6">bienvenue {{ Auth::user()->name??null }}</h1>
     <menu >
         <div class="dropdown col-md-6">
@@ -15,15 +15,18 @@
             menu
         </a>
 
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="/">home</a></li>
+            @if (Auth::check())
             <li><a class="dropdown-item" href="{{ route("univers.create") }}">crée un univers</a></li>
+            @endif
             <li><hr class="dropdown-divider"></li>
             @if (Auth::check())
-            <li><a class="dropdown-item" href="modif">Modifier mon compte</a></li>
-                <li><a class="dropdown-item" href="logout">déconnection</a></li>
+                <li><a class="dropdown-item" href="{{ route('profile.edit') }}">Modifier mon compte</a></li>
+                <li><a class="dropdown-item" href="/logout">déconnection</a></li>
             @else
-                <li><a class="dropdown-item" href="connection">Connection</a></li>
+                <li><a class="dropdown-item" href="/login">Connection</a></li>
+                <li><a class="dropdown-item" href="/register">Crée un compte</a></li>
             @endif
         </ul>
 </div>

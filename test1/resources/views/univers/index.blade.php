@@ -14,7 +14,9 @@
                 <th scope="col" style='background:none;color:white;'>couleur :</th>
                 <th scope="col" style='background:none;color:white;'>description :</th>
                 <th scope="col" style='background:none;color:white;'>logo :</th>
-                <th scope="col" style='background:none;color:white;'>action :</th>
+                @if (Auth::check())
+                    <th scope="col" style='background:none;color:white;'>action :</th>
+                @endif
             </tr>
             @forelse ( $list as $univers )
             <tr>
@@ -34,15 +36,17 @@
                 <td style='background:none'>
                 <img src="{{ asset('storage/'.$univers->logo) }}" alt="logo" title="logo" style="width: 100px; border-radius:25px">
                 </td>
-                <td>
-                    <a type="button" class="btn btn-outline-info" href="{{ route('univers.show', compact('univers')) }}">info</a><br>
-                    <a type="button" class="btn btn-outline-success" href="{{ route('univers.edit', compact('univers')) }}">modifier</a><br>
-                    <form action="{{ route('univers.destroy', compact('univers')) }}" method="post">
-                        @csrf
-                        @method('DELETE')
-                        <input class="btn btn-outline-danger" type="submit" value="supprimer">
-                    </form>
-                </td>
+                @if (Auth::check())
+                    <td>
+                        <a type="button" class="btn btn-outline-info" href="{{ route('univers.show', compact('univers')) }}">info</a><br>
+                        <a type="button" class="btn btn-outline-success" href="{{ route('univers.edit', compact('univers')) }}">modifier</a><br>
+                        <form action="{{ route('univers.destroy', compact('univers')) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <input class="btn btn-outline-danger" type="submit" value="supprimer">
+                        </form>
+                    </td>
+                @endif
             </tr>
             @empty
                         <tr>
