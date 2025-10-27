@@ -23,9 +23,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+Route::resource('univers', UniversController::class)->parameters(['univers' => 'univers']);
+
 
 Route::get('/', [UniversController::class , 'index'])->name('/');
 Route::get('/logout', [UserController::class, 'logout']);
 
-Route::resource('univers', UniversController::class)->parameters(['univers' => 'univers']);
 

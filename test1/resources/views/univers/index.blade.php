@@ -39,12 +39,16 @@
                 @if (Auth::check())
                     <td>
                         <a type="button" class="btn btn-outline-info" href="{{ route('univers.show', compact('univers')) }}">info</a><br>
-                        <a type="button" class="btn btn-outline-success" href="{{ route('univers.edit', compact('univers')) }}">modifier</a><br>
-                        <form action="{{ route('univers.destroy', compact('univers')) }}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <input class="btn btn-outline-danger" type="submit" value="supprimer">
-                        </form>
+                        @can('modif-Univers')
+                            <a type="button" class="btn btn-outline-success" href="{{ route('univers.edit', compact('univers')) }}">modifier</a><br>
+                        @endcan
+                        @can('del-Univers')
+                            <form action="{{ route('univers.destroy', compact('univers')) }}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-outline-danger" type="submit" value="supprimer">
+                            </form>
+                        @endcan
                     </td>
                 @endif
             </tr>

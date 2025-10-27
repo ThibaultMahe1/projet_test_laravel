@@ -18,7 +18,10 @@
         <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="/">home</a></li>
             @if (Auth::check())
-            <li><a class="dropdown-item" href="{{ route("univers.create") }}">crée un univers</a></li>
+            @can('creat-Univers')
+
+                <li><a class="dropdown-item" href="{{ route("univers.create") }}">crée un univers</a></li>
+            @endcan
             @endif
             <li><hr class="dropdown-divider"></li>
             @if (Auth::check())

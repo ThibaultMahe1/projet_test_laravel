@@ -8,12 +8,19 @@ use App\Http\Requests\UniversEditRequest;
 use App\Models\Univers as ModelsUnivers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class UniversController extends Controller
+
+class UniversController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
      */
+    public static function middleware(){
+        return[new Middleware('admin', ['destroy'])];
+    }
+
     public function index()
     {
         $list = Univers::all();
