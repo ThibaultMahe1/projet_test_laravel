@@ -2,29 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\univers;
-use App\Http\Requests\UniversRequest;
 use App\Http\Requests\UniversEditRequest;
-use App\Models\Univers as ModelsUnivers;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UniversRequest;
+use App\Models\univers;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
-
+use Illuminate\Support\Facades\Storage;
 
 class UniversController extends Controller implements HasMiddleware
 {
     /**
      * Display a listing of the resource.
      */
-    public static function middleware(){
-        return[new Middleware('admin', ['destroy'])];
+    public static function middleware()
+    {
+        return [new Middleware('admin', ['destroy'])];
     }
 
     public function index()
     {
         $list = Univers::all();
-        return view('univers.index' , compact('list'));
+
+        return view('univers.index', compact('list'));
         //
     }
 
@@ -33,8 +32,9 @@ class UniversController extends Controller implements HasMiddleware
      */
     public function create()
     {
-        $type="add";
-        return view("univers.modelUnivers", compact('type'));
+        $type = 'add';
+
+        return view('univers.modelUnivers', compact('type'));
     }
 
     /**
@@ -47,13 +47,14 @@ class UniversController extends Controller implements HasMiddleware
         $path = $request->file('logo')->store('image', 'public');
 
         Univers::create([
-            'nom' => $request["nom"],
+            'nom' => $request['nom'],
             'description' => $request['description'],
             'img_fond' => $pathfond,
             'logo' => $path,
             'couleur_principal' => $request['couleur_principal'],
             'couleur_secondaire' => $request['couleur_secondaire'],
-    ]);
+        ]);
+
         return redirect('/')->with('success', 'univers créé avec succès !');
     }
 
@@ -63,7 +64,7 @@ class UniversController extends Controller implements HasMiddleware
     public function show(univers $univers)
     {
         //
-        return view("univers.showUnivers", compact('univers'));
+        return view('univers.showUnivers', compact('univers'));
     }
 
     /**
@@ -71,8 +72,9 @@ class UniversController extends Controller implements HasMiddleware
      */
     public function edit(univers $univers)
     {
-        $type='edit';
-        return view("univers.modelUnivers", compact('univers'), compact('type'));
+        $type = 'edit';
+
+        return view('univers.modelUnivers', compact('univers'), compact('type'));
     }
 
     /**
@@ -82,29 +84,30 @@ class UniversController extends Controller implements HasMiddleware
     {
         $pathfond = $univers->img_fond;
         $path = $univers->logo;
-        if ($request->file('img_fond')!=null):
+        if ($request->file('img_fond') != null) {
             Storage::disk('public')->delete($pathfond);
             $pathfond = $request->file('img_fond')->store('image', 'public');
-        endif;
-        if ($request->file('logo')!=null):
+        }
+        if ($request->file('logo') != null) {
             Storage::disk('public')->delete($path);
             $path = $request->file('logo')->store('image', 'public');
-        endif;
+        }
 
-        Univers::where('id' , $univers->id)->first()->update([
-            'nom' => $request["nom"],
+        Univers::where('id', $univers->id)->first()->update([
+            'nom' => $request['nom'],
             'description' => $request['description'],
             'img_fond' => $pathfond,
             'logo' => $path,
             'couleur_principal' => $request['couleur_principal'],
             'couleur_secondaire' => $request['couleur_secondaire'],
         ]);
+
         return redirect('/')->with('success', 'univers créé avec succès !');
     }
 
     /**
      * Remove the specified resource from storage.
-    */
+     */
     public function destroy(univers $univers)
     {
         //
@@ -115,6 +118,7 @@ class UniversController extends Controller implements HasMiddleware
         Storage::disk('public')->delete($path);
 
         Univers::where('id', $univers->id)->delete();
-         return redirect('/')->with('success', 'univers supprimée avec succès !');
-        }
+
+        return redirect('/')->with('success', 'univers supprimée avec succès !');
     }
+}

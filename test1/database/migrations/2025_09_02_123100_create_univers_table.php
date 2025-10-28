@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->string('img_fond');
             $table->string('logo');
-            $table->string('couleur_principal' , length: 7);
+            $table->string('couleur_principal', length: 7);
             $table->string('couleur_secondaire', length: 7);
             $table->timestamp('updated_at');
             $table->timestamp('created_at');

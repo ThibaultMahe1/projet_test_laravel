@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Middleware\admin;
+use App\Http\Middleware\LangLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use App\Http\Middleware\admin;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,7 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['admin' => admin::class]);
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias(['LangLocale' => LangLocale::class]);
+    })
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();
-

@@ -3,13 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-
-    
 class UserController extends Controller
 {
     public function create(Request $request)
@@ -20,8 +17,9 @@ class UserController extends Controller
             'password' => 'required|min:6',
 
         ]);
-        $validated["password"] = Hash::make($validated["password"]);
+        $validated['password'] = Hash::make($validated['password']);
         User::create($validated);
+
         return redirect('/connection')->with('success', 'Compte créé avec succès !');
     }
 
@@ -32,10 +30,11 @@ class UserController extends Controller
             'password' => 'required|min:6',
         ]);
 
-        $user = User::where('email', $validated["email"])->first();
+        $user = User::where('email', $validated['email'])->first();
 
         if ($user && Hash::check($validated['password'], $user->password)) {
             Auth::login($user);
+
             return redirect('/')->with('success', 'Connecté avec succès !');
         }
 
@@ -45,6 +44,7 @@ class UserController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect("/");
+
+        return redirect('/');
     }
 }

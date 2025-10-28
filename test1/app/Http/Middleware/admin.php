@@ -17,7 +17,7 @@ class admin
     public function handle(Request $request, Closure $next): Response
     {
         dump(Auth::user()->admin == true);
-        if(Auth::user()->admin == true){
+        if (Auth::user()->admin == true) {
             return $next($request);
         }
 

@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <header class="p-3 mb-2 text-white bg-dark row row-cols-lg-auto g-3 align-items-center">
-    <h1 class="col-md-6">bienvenue {{ Auth::user()->name??null }}</h1>
+    <h1 class="col-md-6">{{ __('welcome') }} {{ Auth::user()->name??null }}</h1>
     <menu >
         <div class="dropdown col-md-6">
         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,8 +32,22 @@
                 <li><a class="dropdown-item" href="/register">Crée un compte</a></li>
             @endif
         </ul>
+    </menu>
+    <menu>
+</div>
+        <div class="dropdown col-md-6">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+            langue
+        </a>
+
+        <ul class="dropdown-menu " aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="/lang/fr">francais</a></li>
+            <li><a class="dropdown-item" href="/lang/en">anglais</a></li>
+        </ul>
+
 </div>
     </menu>
+    <a href="/mail">mail</a>
 </header>
 <body>
     @yield('content')
