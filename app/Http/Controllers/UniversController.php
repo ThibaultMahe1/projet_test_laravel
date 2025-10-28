@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UniversEditRequest;
 use App\Http\Requests\UniversRequest;
-use App\Models\univers;
+use App\Models\Univers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Routing\Controllers\Middleware;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\View\View;
 
 class UniversController extends Controller implements HasMiddleware
 {
@@ -19,7 +21,7 @@ class UniversController extends Controller implements HasMiddleware
         return [new Middleware('admin', ['destroy'])];
     }
 
-    public function index()
+    public function index(): View
     {
         $list = Univers::all();
 
@@ -30,7 +32,7 @@ class UniversController extends Controller implements HasMiddleware
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         $type = 'add';
 
@@ -40,7 +42,7 @@ class UniversController extends Controller implements HasMiddleware
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UniversRequest $request)
+    public function store(UniversRequest $request): RedirectResponse
     {
 
         $pathfond = $request->file('img_fond')->store('image', 'public');
@@ -61,7 +63,7 @@ class UniversController extends Controller implements HasMiddleware
     /**
      * Display the specified resource.
      */
-    public function show(univers $univers)
+    public function show(univers $univers): View
     {
         //
         return view('univers.showUnivers', compact('univers'));
@@ -70,7 +72,7 @@ class UniversController extends Controller implements HasMiddleware
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(univers $univers)
+    public function edit(univers $univers): View
     {
         $type = 'edit';
 
@@ -80,7 +82,7 @@ class UniversController extends Controller implements HasMiddleware
     /**
      * Update the specified resource in storage.
      */
-    public function update(UniversEditRequest $request, univers $univers)
+    public function update(UniversEditRequest $request, univers $univers): RedirectResponse
     {
         $pathfond = $univers->img_fond;
         $path = $univers->logo;
@@ -108,7 +110,7 @@ class UniversController extends Controller implements HasMiddleware
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(univers $univers)
+    public function destroy(univers $univers): RedirectResponse
     {
         //
         // dd($univers);

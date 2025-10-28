@@ -22,10 +22,8 @@ namespace App\Models{
  * @property string $couleur_secondaire
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon $created_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $favoritedBy
+ * @property-read Collection<int, User> $favoritedBy
  * @property-read int|null $favorited_by_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
- * @property-read int|null $notifications_count
  * @method static \Database\Factories\UniversFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Univers newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Univers newQuery()
@@ -39,6 +37,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Univers whereLogo($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Univers whereNom($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Univers whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 	class Univers extends \Eloquent {}
 }
@@ -78,7 +77,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder<static>|User whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
-	class User extends \Eloquent {}
+	class User extends \Eloquent implements \Illuminate\Contracts\Auth\MustVerifyEmail {}
 }
 

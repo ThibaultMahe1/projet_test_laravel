@@ -19,6 +19,9 @@ class VerifyEmailController extends Controller
         }
 
         if ($request->user()->markEmailAsVerified()) {
+            if ($request->user() === null) {
+                abort(404);
+            }
             event(new Verified($request->user()));
         }
 

@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
  * @property int $id
@@ -16,10 +17,8 @@ use Illuminate\Notifications\Notifiable;
  * @property string $couleur_secondaire
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon $created_at
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\User> $favoritedBy
+ * @property-read Collection<int, User> $favoritedBy
  * @property-read int|null $favorited_by_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
- * @property-read int|null $notifications_count
  *
  * @method static \Database\Factories\UniversFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder<static>|Univers newModelQuery()
@@ -39,11 +38,15 @@ use Illuminate\Notifications\Notifiable;
  */
 class Univers extends Model
 {
-    use HasFactory, Notifiable;
+    /**
+     *@use HasFactory<\Database\Factories\UniversFactory>
+     */
+    use HasFactory;
 
     protected $guarded = [];
 
-    public function favoritedBy()
+    // @phpstan-ignore-next-line
+    public function favoritedBy(): BelongsToMany
     {
         return $this->belongsToMany(User::class, 'favorites');
     }

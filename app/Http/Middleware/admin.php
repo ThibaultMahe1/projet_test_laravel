@@ -16,8 +16,10 @@ class admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        dump(Auth::user()->admin == true);
-        if (Auth::user()->admin == true) {
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+
+        if ($user->admin === 1) {
             return $next($request);
         }
 

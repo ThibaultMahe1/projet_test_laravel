@@ -6,66 +6,39 @@ use App\Models\Univers;
 
 class testRepositories
 {
-    protected $test;
+    protected Univers $test;
 
     public function __construct(Univers $test)
     {
         $this->test = $test;
     }
 
-    private function save(Univers $test, array $inputs)
+    /**
+     * @param  array<string,mixed>  $inputs
+     */
+    private function save(Univers $test, array $inputs): Univers
     {
+        $test->fill($inputs);
         $test->save();
 
         return $test;
     }
 
-    public function store(array $inputs)
+    /**
+     * @param  array<string,mixed>  $inputs
+     */
+    public function store(array $inputs): Univers
     {
-        $test = new $this->test;
+        $test = $this->test->newInstance();
 
         return $this->save($test, $inputs);
     }
 
-    public function update(Univers $test, array $inputs)
+    /**
+     * @param  array<string,mixed>  $inputs
+     */
+    public function update(Univers $test, array $inputs): Univers
     {
         return $this->save($test, $inputs);
     }
 }
-
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

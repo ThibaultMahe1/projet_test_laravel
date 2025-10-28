@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
@@ -46,7 +47,7 @@ use Silber\Bouncer\Database\HasRolesAndAbilities;
  *
  * @mixin \Eloquent
  */
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -87,7 +88,8 @@ class User extends Authenticatable
         ];
     }
 
-    public function favorites()
+    // @phpstan-ignore-next-line
+    public function favorites(): BelongsToMany
     {
         return $this->belongsToMany(Univers::class, 'favorites');
     }

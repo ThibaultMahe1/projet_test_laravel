@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function create(Request $request)
+    public function create(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'name' => 'required|min:3',
@@ -23,7 +24,7 @@ class UserController extends Controller
         return redirect('/connection')->with('success', 'Compte créé avec succès !');
     }
 
-    public function login(Request $request)
+    public function login(Request $request): RedirectResponse
     {
         $validated = $request->validate([
             'email' => 'required|email',
@@ -41,7 +42,7 @@ class UserController extends Controller
         return back()->with('error', 'Email ou mot de passe incorrect.');
     }
 
-    public function logout()
+    public function logout(): RedirectResponse
     {
         Auth::logout();
 
