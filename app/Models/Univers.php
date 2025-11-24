@@ -17,7 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * @property string $couleur_secondaire
  * @property \Illuminate\Support\Carbon $updated_at
  * @property \Illuminate\Support\Carbon $created_at
- * @property-read Collection<int, User> $favoritedBy
+ * @property-read Collection<int, \App\Models\User> $favoritedBy
  * @property-read int|null $favorited_by_count
  *
  * @method static \Database\Factories\UniversFactory factory($count = null, $state = [])
