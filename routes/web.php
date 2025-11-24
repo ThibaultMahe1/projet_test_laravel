@@ -6,6 +6,7 @@ use App\Http\Controllers\UniversController;
 use App\Http\Controllers\UserController;
 use App\Mail\infomail;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 // use App;
 Route::middleware('LangLocale')->group(function () {
@@ -34,10 +35,15 @@ Route::middleware('LangLocale')->group(function () {
         return redirect()->back();
     });
 
-    Route::get('/mail', function () {
-        Mail::to('destinataire@example.com')->send(new infomail);
+    Route::post('/mail', function () {
+        if (auth()->check() && auth()->user()->email) {
+            Mail::to(auth()->user()->email)->send(new infomail);
+            return redirect()->back()->with('status', __('Email envoyé'));
+        }
 
-    });
+        return redirect()->back()->with('error', __('Utilisateur non authentifié'));
+
+    })->middleware('auth')->name('send.mail');
     Route::get('/', [UniversController::class, 'index'])->name('/');
     Route::get('/logout', [UserController::class, 'logout']);
     Route::post('/favorites/toggle', [FavoriteController::class, 'toggle'])->name('favorites.toggle');

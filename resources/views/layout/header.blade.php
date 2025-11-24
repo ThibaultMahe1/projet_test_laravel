@@ -47,9 +47,18 @@
 
 </div>
     </menu>
-    <a href="/mail">mail</a>
+    <form action="{{ route('send.mail') }}" method="POST" class="d-inline">
+        @csrf
+        <button type="submit" class="btn btn-primary">mail</button>
+    </form>
 </header>
 <body>
+    @if(session('status'))
+        <div class="container mt-3"><div class="alert alert-success">{{ session('status') }}</div></div>
+    @endif
+    @if(session('error'))
+        <div class="container mt-3"><div class="alert alert-danger">{{ session('error') }}</div></div>
+    @endif
     @yield('content')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
